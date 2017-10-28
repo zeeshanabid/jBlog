@@ -5,6 +5,8 @@ import com.zeeshanabid.jblog.storage.PostStorage;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collection;
+
 public class PostStorageTest {
     @Test
     public void testCreatePost() throws Exception {
@@ -101,4 +103,29 @@ public class PostStorageTest {
         posts.get(1);
         Assert.assertEquals("Posts count must be 0", posts.count(), 0);
     }
+
+    @Test
+    public void testGetAll() throws Exception {
+        PostStorage posts    = new PostStorage();
+        Post        p1       = new Post();
+        String      title1   = "First Post";
+        String      content1 = "My first post.";
+        p1.setTitle(title1);
+        p1.setContent(content1);
+        posts.save(p1);
+
+        Post        p2       = new Post();
+        String      title2   = "Second Post";
+        String      content2 = "My Second post.";
+        p2.setTitle(title2);
+        p2.setContent(content2);
+        posts.save(p2);
+
+        Collection<Post> allPosts = posts.getAll();
+        Assert.assertEquals("Count must be 2", allPosts.size(), 2);
+
+        Assert.assertTrue("First post must be in the list", allPosts.contains(p1));
+        Assert.assertTrue("Second post must be in the list", allPosts.contains(p2));
+    }
+
 }

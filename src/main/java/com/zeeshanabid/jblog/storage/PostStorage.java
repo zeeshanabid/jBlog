@@ -48,6 +48,13 @@ public class PostStorage {
         return posts.get(id);
     }
 
+    public Collection<Post> getAll() {
+        return posts.values()
+                    .stream()
+                    .sorted(Comparator.comparing(Post::getCreatedAt).reversed())
+                    .collect(Collectors.toList());
+    }
+
     public int count() {
         return posts.size();
     }
