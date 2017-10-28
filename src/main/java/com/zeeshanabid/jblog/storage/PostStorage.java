@@ -4,9 +4,9 @@ import com.zeeshanabid.jblog.exceptions.MaxIdReachedException;
 import com.zeeshanabid.jblog.exceptions.PostNotFound;
 import com.zeeshanabid.jblog.model.Post;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PostStorage {
     private Map<Integer, Post> posts;
@@ -18,8 +18,11 @@ public class PostStorage {
     }
 
     public void save(Post post) throws MaxIdReachedException {
-        int newId = idGenerator.nextId();
+        int           newId = idGenerator.nextId();
+        LocalDateTime now   = LocalDateTime.now();
         post.setId(newId);
+        post.setCreatedAt(now);
+        post.setUpdatedAt(now);
         posts.put(newId, post);
     }
 
@@ -27,6 +30,7 @@ public class PostStorage {
         if (!posts.containsKey(post.getId())) {
             throw new PostNotFound();
         }
+        post.setUpdatedAt(LocalDateTime.now());
         posts.put(post.getId(), post);
     }
 
