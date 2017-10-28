@@ -36,7 +36,7 @@ public class PostTest {
         Post              p         = new Post();
         String            time      = "2017-10-28 20:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        p.setTime(LocalDateTime.parse(time, formatter));
-        Assert.assertEquals("Time of the post must match", p.getTime().format(formatter), time);
+        p.setCreatedAt(LocalDateTime.parse(time, formatter));
+        Assert.assertEquals("Time of the post must match", p.getCreatedAt().format(formatter), time);
     }
 }
