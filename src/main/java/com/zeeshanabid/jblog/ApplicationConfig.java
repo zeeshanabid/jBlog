@@ -1,18 +1,16 @@
 package com.zeeshanabid.jblog;
 
+import com.zeeshanabid.jblog.controller.PostController;
+import org.glassfish.jersey.server.ResourceConfig;
+
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.HashMap;
-import java.util.Map;
 
-@ApplicationPath("/")
-public class ApplicationConfig extends Application {
+@ApplicationPath("/blog")
+public class ApplicationConfig extends ResourceConfig {
 
-    @Override
-    public Map<String, Object> getProperties() {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("jersey.config.server.provider.packages", "com.zeeshanabid.jblog");
-        return properties;
+    public ApplicationConfig() {
+        super(PostController.class);
+        packages("com.zeeshanabid.jblog");
     }
 
 }
