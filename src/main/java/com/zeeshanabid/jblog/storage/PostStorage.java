@@ -55,6 +55,13 @@ public class PostStorage {
                     .collect(Collectors.toList());
     }
 
+    public Collection<Post> search(String query) {
+        return posts.values()
+                    .stream()
+                    .filter((p) -> p.search(query))
+                    .collect(Collectors.toList());
+    }
+
     public int count() {
         return posts.size();
     }

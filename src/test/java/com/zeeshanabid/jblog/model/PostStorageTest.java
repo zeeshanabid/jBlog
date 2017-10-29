@@ -128,4 +128,25 @@ public class PostStorageTest {
         Assert.assertTrue("Second post must be in the list", allPosts.contains(p2));
     }
 
+    @Test
+    public void testSearch() throws Exception {
+        PostStorage posts    = new PostStorage();
+        Post        p1       = new Post();
+        String      title1   = "First Post";
+        String      content1 = "My first post.";
+        p1.setTitle(title1);
+        p1.setContent(content1);
+        posts.save(p1);
+
+        Post        p2       = new Post();
+        String      title2   = "Second Post";
+        String      content2 = "My Second post.";
+        p2.setTitle(title2);
+        p2.setContent(content2);
+        posts.save(p2);
+
+        Collection<Post> searchResult = posts.search("first");
+        Assert.assertTrue("Search result should contain first post", searchResult.contains(p1));
+        Assert.assertFalse("Search result should not contain second post", searchResult.contains(p2));
+    }
 }

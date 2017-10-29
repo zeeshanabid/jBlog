@@ -49,6 +49,14 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
+    public boolean search(String query) {
+        if (query == null || query.length() == 0) {
+            return false;
+        }
+        query = query.toLowerCase();
+        return title.toLowerCase().contains(query) || content.toLowerCase().contains(query);
+    }
+
     @Override
     public String toString() {
         return new StringBuilder()

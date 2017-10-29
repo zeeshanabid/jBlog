@@ -105,4 +105,24 @@ public class PostControllerTest extends JerseyTest {
         Assert.assertEquals("Update post successfully", response.getStatus(), Status.OK.getStatusCode());
         Assert.assertEquals("Content should be updated", responseEntity.getContent(), p.getContent());
     }
+
+    @Test
+    public void testSearchPosts() {
+        Post p = new Post();
+        p.setTitle("First post");
+        p.setContent("This is my first post");
+
+        Response   response = target("posts/search").queryParam("q", "first").request(MediaType.APPLICATION_JSON).get(Response.class);
+        List<Post> posts    = response.readEntity(new GenericType<List<Post>>() {});
+        Assert.assertEquals("Search posts successfully", response.getStatus(), Status.OK.getStatusCode());
+        Assert.assertEquals("Posts must be 0",           posts.size(),         0);
+
+        Entity<Post> postEntity = Entity.entity(p, MediaType.APPLICATION_JSON);
+        target("posts").request(MediaType.APPLICATION_JSON).post(postEntity);
+
+        response = target("posts/search").queryParam("q", "first").request(MediaType.APPLICATION_JSON).get(Response.class);
+        posts    = response.readEntity(new GenericType<List<Post>>() {});
+        Assert.assertEquals("Search posts successfully", response.getStatus(), Status.OK.getStatusCode());
+        Assert.assertEquals("Posts must be 1",           posts.size(),         1);
+    }
 }

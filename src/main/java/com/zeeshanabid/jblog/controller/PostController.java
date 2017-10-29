@@ -86,4 +86,15 @@ public class PostController {
         posts.update(p);
         return p;
     }
+
+    /**
+     * Searches a post based on given query.
+     * @param query search query
+     * @return A list of matched posts
+     */
+    @GET
+    @Path("/search")
+    public Collection<Post> searchPost(@QueryParam("q") String query) {
+        return posts.search(query);
+    }
 }
