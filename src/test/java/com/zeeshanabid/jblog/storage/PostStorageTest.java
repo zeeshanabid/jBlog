@@ -1,7 +1,7 @@
-package com.zeeshanabid.jblog.model;
+package com.zeeshanabid.jblog.storage;
 
 import com.zeeshanabid.jblog.exceptions.PostNotFound;
-import com.zeeshanabid.jblog.storage.PostStorage;
+import com.zeeshanabid.jblog.model.Post;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class PostStorageTest {
     @Test
     public void testCreatePost() throws Exception {
         PostStorage posts = new PostStorage();
-        Post        p     = new Post();
+        Post p     = new Post();
         p.setTitle("First Post");
 
         posts.save(p);
