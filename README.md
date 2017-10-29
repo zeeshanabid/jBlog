@@ -1,9 +1,17 @@
 # jBlog
 A simple java based blog.
 
-## Run
+## Run Server
 
 `mvn jetty:run`
+
+## Run Tests
+
+`mvn test`
+
+## Package WAR file
+
+`mvn package`
 
 This will start a local server on port `:8080`
 
